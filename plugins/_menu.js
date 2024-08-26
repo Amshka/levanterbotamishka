@@ -23,9 +23,10 @@ bot.addCommand(
       return 0
     })
     const [date, time] = getDate()
-    let CMD_HELP = `╭────────────────╮
-						ʟᴇᴠᴀɴᴛᴇʀ
-╰────────────────╯
+    let CMD_HELP = 
+`╭─────────────────────╮
+  AMIZ POWERED BY LEVANTER						
+╰─────────────────────╯
 
 ╭────────────────
 │ Prefix : ${PREFIX}
@@ -38,6 +39,7 @@ bot.addCommand(
 │ Ram : ${getRam()}
 │ Uptime : ${getUptime('t')}
 │ Platform : ${getPlatform()}
+| Deployment : Amishka Thejan
 ╰────────────────
 ╭────────────────
 `
@@ -105,6 +107,7 @@ bot.addCommand(
 ┃❃│ Ram : ${getRam()}
 ┃❃│ Uptime : ${getUptime('t')}
 ┃❃│ Platform : ${getPlatform()}
+┃❃│ Deployment : Amishka Thejan
 ┃❃╰───────────────
 ╰═════════════════⊷\`\`\`\n`
 
