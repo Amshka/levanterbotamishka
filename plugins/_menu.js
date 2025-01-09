@@ -2,21 +2,18 @@ const bot = require('../lib/events')
 const {
   addSpace,
   textToStylist,
-  PREFIX,
   getUptime,
-  PLUGINS,
   getRam,
   getDate,
   getPlatform,
 } = require('../lib/')
-const { VERSION } = require('../config')
 bot.addCommand(
   {
     pattern: 'help ?(.*)',
     dontAddCommandList: true,
   },
-  async (message, match) => {
-    const sorted = bot.commands.sort((a, b) => {
+  async (message, match, ctx) => {
+    const sorted = ctx.commands.sort((a, b) => {
       if (a.name && b.name) {
         return a.name.localeCompare(b.name)
       }
@@ -29,13 +26,13 @@ bot.addCommand(
 ╰─────────────────────╯
 
 ╭────────────────
-│ Prefix : ${PREFIX}
+│ Prefix : ${ctx.PREFIX}
 │ User : ${message.pushName}
 │ Time : ${time}
 │ Day : ${date.toLocaleString('en', { weekday: 'long' })}
 │ Date : ${date.toLocaleDateString('hi')}
-│ Version : ${VERSION}
-│ Plugins : ${PLUGINS.count}
+│ Version : ${ctx.VERSION}
+│ Plugins : ${ctx.pluginsCount}
 │ Ram : ${getRam()}
 │ Uptime : ${getUptime('t')}
 │ Platform : ${getPlatform()}
@@ -62,9 +59,9 @@ bot.addCommand(
     pattern: 'list ?(.*)',
     dontAddCommandList: true,
   },
-  async (message, match) => {
+  async (message, match, ctx) => {
     let msg = ''
-    const sorted = bot.commands.sort((a, b) => {
+    const sorted = ctx.commands.sort((a, b) => {
       if (a.name && b.name) {
         return a.name.localeCompare(b.name)
       }
@@ -83,9 +80,9 @@ bot.addCommand(
     pattern: 'menu ?(.*)',
     dontAddCommandList: true,
   },
-  async (message, match) => {
+  async (message, match, ctx) => {
     const commands = {}
-    bot.commands.map(async (command, index) => {
+    ctx.commands.map(async (command, index) => {
       if (command.dontAddCommandList === false && command.pattern !== undefined) {
         let cmdType = command.type.toLowerCase()
         if (!commands[cmdType]) commands[cmdType] = []
@@ -97,13 +94,13 @@ bot.addCommand(
     const [date, time] = getDate()
     let msg = `\`\`\`╭═══ LEVANTER ═══⊷
 ┃❃╭──────────────
-┃❃│ Prefix : ${PREFIX}
+┃❃│ Prefix : ${ctx.PREFIX}
 ┃❃│ User : ${message.pushName}
 ┃❃│ Time : ${time}
 ┃❃│ Day : ${date.toLocaleString('en', { weekday: 'long' })}
 ┃❃│ Date : ${date.toLocaleDateString('hi')}
-┃❃│ Version : ${VERSION}
-┃❃│ Plugins : ${PLUGINS.count}
+┃❃│ Version : ${ctx.VERSION}
+┃❃│ Plugins : ${ctx.pluginsCount}
 ┃❃│ Ram : ${getRam()}
 ┃❃│ Uptime : ${getUptime('t')}
 ┃❃│ Platform : ${getPlatform()}
